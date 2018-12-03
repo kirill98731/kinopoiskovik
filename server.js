@@ -647,6 +647,11 @@ app.post('/film/:id/review', urlencodedParser, function (req, res) {
     });
 });
 
-app.listen(app.get( 'port' ), function () {
-    console.log('Server is running.. on Port ' + app.get( 'port' ));
-});
+// app.listen(app.get( 'port' ), function () {
+//     console.log('Server is running.. on Port ' + app.get( 'port' ));
+// });
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 3000;
+}
+app.listen(port);
