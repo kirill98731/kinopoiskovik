@@ -1,0 +1,28 @@
+{
+  "name": "kinopoiskovik",
+  "version": "1.0.0",
+  "description": "heroku app",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4",
+    "ejs": "^2.6.1",
+    "pg": "^7.7.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirill98731/kinopoiskovik.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kirill98731/kinopoiskovik/issues"
+  },
+  "homepage": "https://github.com/kirill98731/kinopoiskovik#readme"
+}
