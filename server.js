@@ -19,10 +19,10 @@ function compare(A, B) {
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 const config = {
-    host: '14523316.ngrok.io',
-    user: 'postgres',
-    database: 'Kinopoiskovik',
-    password: '5380018111g',
+    host: "ec2-54-243-150-10.compute-1.amazonaws.com",
+    user: 'hojubgdnbjkdzo',
+    database: 'ddi1qu9hjo2pd4',
+    password: '2e9c41f63ddaf814b02e9d5f5bde436f28702ea66819b56884d99f384eac198b',
     port: 5432
 };
 
