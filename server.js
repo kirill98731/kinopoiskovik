@@ -647,6 +647,6 @@ app.post('/film/:id/review', urlencodedParser, function (req, res) {
     });
 });
 
-app.listen(3000, function () {
+app.listen(app.get( 'port' ), function () {
     console.log('Server is running.. on Port 3000');
 });
