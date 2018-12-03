@@ -19,6 +19,7 @@ function compare(A, B) {
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 const config = {
+    host: 'https://14523316.ngrok.io';
     user: 'postgres',
     database: 'Kinopoiskovik',
     password: '5380018111g',
