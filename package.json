@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/kirill98731/kinopoiskovik/issues"
   },
-  "homepage": "https://github.com/kirill98731/kinopoiskovik#readme"
+  "homepage": "https://github.com/kirill98731/kinopoiskovik#readme",
+  "engines": {
+    "node": "v8.12.0"
+  }
 }
