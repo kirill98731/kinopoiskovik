@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="data:;base64,=">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="../public/mainstyle.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title> КиноПоисковик </title>
+  <style>
+    .bottom{
+      position: fixed; /* Фиксированное положение */
+      bottom: 0; /* Левый нижний угол */
+    }
+    form {
+      width: 20%;
+      margin-left: 40%;
+      margin-top: 10px;
+    }
+    .qwerty{
+      margin-top: 100px;
+    }
+    button{
+      width: 60%;
+    }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">КиноПоисковик</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="#">Афиша</a>
+      <a class="nav-item nav-link" href="/films">Фильмы</a>
+      <a class="nav-item nav-link" href="#">Рейтинги</a>
+      <a class="nav-item nav-link" href="#">Медиа</a>
+      <% if (obj.login != undefined) {%>
+        <a class="nav-item nav-link" href="/favorite_films">Любимые</a>
+      <%}%>
+    </div>
+  </div>
+</nav>
+
+<form action= "/user/<%= obj.do %>" method="post" class = "qwerty">
+  <% if (obj.do == "login_err") {%>
+    <div class = "err">Неверный почтовый адрес или пароль</div>
+  <br>
+  <%}%>
+  <% if ((obj.do == "sign_err") || (obj.do == "edit_err")){%>
+    <div class = "err">Этот почтовый адрес или логин заняты или указаны некорректно</div>
+    <br>
+  <%}%>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Почтовый адрес</label>
+    <%if ((obj.do == "edit") || (obj.do == "edit_err")) {%>
+      <input name = "email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "<%= obj.email%>">
+    <%} else {%>
+      <input name = "email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+    <%}%>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Пароль</label>
+    <%if ((obj.do == "edit") || (obj.do == "edit_err")) {%>
+      <input name = "password" type="password" class="form-control" id="exampleInputPassword1" placeholder="********">
+    <%} else {%>
+      <input name = "password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    <%}%>
+  </div>
+  <% if ((obj.do != "login") && (obj.do != "login_err")) {%>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Логин</label>
+      <%if ((obj.do == "edit") || (obj.do == "edit_err")) {%>
+        <input name = "login" type="login" class="form-control" id="exampleInputLogin" placeholder="<%=obj.login %>">
+        <small id="emailHelp" class="form-text text-muted">Логин не должен превышать 20 символов</small>
+      <%} else {%>
+        <input name = "login" type="login" class="form-control" id="exampleInputLogin" placeholder="Login">
+        <small id="emailHelp" class="form-text text-muted">Логин не должен превышать 20 символов</small>
+      <%}%>
+    </div>
+  <%}%>
+  <button type="submit" class="btn btn-primary"><%= obj.text %></button>
+</form>
+<%if ((obj.do == "edit") || (obj.do == "edit_err")) {%>
+  <form action= "/user/delete" method="post">
+    <button type="submit" class="btn btn-danger">Удалить профиль</button>
+  </form>
+<%}%>
+
+
+<div class="bottom">
+  Copyright © 2018. All rights reserved. КиноПоисковик.
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

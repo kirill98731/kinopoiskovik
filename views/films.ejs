@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="data:;base64,=">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="mainstyle.css" rel="stylesheet">
+  <style>
+    img{
+      height: 215px;
+      width: 150px;
+    }
+    a{
+      color: grey;
+    }
+    <%if (obj.length < 3) {%>
+    .bottom{
+      position: fixed; /* Фиксированное положение */
+      bottom: 0; /* Левый нижний угол */
+    }
+    <%}%>
+  </style>
+  <meta charset="UTF-8">
+  <title> Фильмы </title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">КиноПоисковик</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="#">Афиша</a>
+      <a class="nav-item nav-link" href="/films">Фильмы</a>
+      <a class="nav-item nav-link" href="#">Рейтинги</a>
+      <a class="nav-item nav-link" href="#">Медиа</a>
+      <% if (login != undefined) {%>
+        <a class="nav-item nav-link" href="/favorite_films">Любимые</a>
+      <%}%>
+    </div>
+    <% if (login == undefined) {%>
+      <div class="btn-group" role="group" aria-label="Basic example" id = "register">
+        <a class="btn btn-secondary" href="/user/sign" role="button">Регистрация</a>
+        <a class="btn btn-secondary" href="/user/login" role="button">Войти</a>
+      </div>
+    <%}%>
+    <% if (login != undefined) {%>
+      <form action= "/user/logout" method="post" id = "register">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <a class="btn btn-secondary" href="/user/edit" role="button" id = "out"><%= login %></a>
+          <button type="submit" class="btn btn-secondary"> Выйти </button>
+        </div>
+      </form>
+    <%}%>
+  </div>
+</nav>
+<% if (obj.length == 0) {%>
+  <h4 class = "nope">У вас пока нет любимых фильмов</h4>
+<%}%>
+
+<table class="table table-hover">
+  <tbody>
+  <% for (i=0;i<obj.length; i++){%>
+    <% var category = obj[i].genre.split(', ') %>
+    <% var country = obj[i].country.split(', ') %>
+    <% var producer = obj[i].producer.split(', ') %>
+    <tr>
+      <th scope="row"><%= obj[i].id %></th>
+      <td><a href="/film/<%= obj[i].product_id %>"> <img src = <%= obj[i].url_poster %> > </a> </td>
+      <td><h4><a href="/film/<%= obj[i].product_id %>"><%= obj[i].name %></a></h4><p class = "description"> <br> <%= obj[i].name %> (<%= obj[i].year %>)  <%= obj[i].time %> мин. <br> <% for (j=0;j<country.length - 1; j++){%><a href="/films/country/<%=country[j]%>"><%=country[j] %></a>,  <%}%><a href="/films/country/<%=country[country.length - 1]%>"><%=country[country.length - 1]%></a>,  реж. <% for (j=0;j<producer.length - 1; j++){%><a href="/films/producer/<%=producer[j]%>"><%=producer[j]%></a>,  <%}%><a href="/films/producer/<%=producer[producer.length - 1]%>"><%=producer[producer.length - 1]%></a> <br>(<% for (j=0;j<category.length - 1; j++){%><a href="/films/category/<%=category[j]%>"><%=category[j]%></a>,  <%}%><a href="/films/category/<%=category[category.length - 1]%>"><%=category[category.length - 1]%></a>)</p> </td>
+    </tr>
+   <%}%>
+  </tbody>
+</table>
+
+
+<div class="bottom">
+  Copyright © 2018. All rights reserved. КиноПоисковик.
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
+

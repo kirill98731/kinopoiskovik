@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="data:;base64,=">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="mainstyle.css" rel="stylesheet">
+  <style>
+    td{
+      font-size: small;
+      width: 25%;
+    }
+  a{
+    color: black;
+  }
+  </style>
+  <meta charset="UTF-8">
+  <title> <%= obj.name %> </title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">КиноПоисковик</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="#">Афиша</a>
+      <a class="nav-item nav-link" href="/films">Фильмы</a>
+      <a class="nav-item nav-link" href="#">Рейтинги</a>
+      <a class="nav-item nav-link" href="#">Медиа</a>
+      <% if (obj.login != undefined) {%>
+        <a class="nav-item nav-link" href="/favorite_films">Любимые</a>
+      <%}%>
+    </div>
+    <% if (obj.login == undefined) {%>
+      <div class="btn-group" role="group" aria-label="Basic example" id = "register">
+        <a class="btn btn-secondary" href="/user/sign" role="button">Регистрация</a>
+        <a class="btn btn-secondary" href="/user/login" role="button">Войти</a>
+      </div>
+    <%}%>
+    <% if (obj.login != undefined) {%>
+      <form action= "/user/logout" method="post" id = "register">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <a class="btn btn-secondary" href="/user/edit" role="button" id = "out"><%= obj.login %></a>
+          <button type="submit" class="btn btn-secondary"> Выйти </button>
+        </div>
+      </form>
+    <%}%>
+  </div>
+</nav>
+
+<% var country = obj.country.split(', ') %>
+<% var producer = obj.producer.split(', ') %>
+<% var filmscript = obj.filmscript.split(', ') %>
+<% var operator = obj.operator.split(', ') %>
+<% var composer = obj.composer.split(', ') %>
+<% var painter = obj.painter.split(', ') %>
+<% var installation = obj.installation.split(', ') %>
+<% var category = obj.genre.split(', ') %>
+<% var actor = obj.in_role.split(', ') %>
+
+<h2>
+  <%= obj.name %>
+</h2>
+
+<table class="table table-striped">
+  <tbody>
+  <tr>
+    <td rowspan="10"> <img src=<%= obj.url_poster %>> </td>
+    <td>Год</td>
+    <td><%= obj.year %></td>
+  </tr>
+  <tr>
+    <td>Страна</td>
+    <td><% for (j=0;j<country.length - 1; j++){%><a href="/films/country/<%=country[j]%>"><%=country[j]%></a>,  <%}%><a href="/films/country/<%=country[country.length - 1]%>"><%=country[country.length - 1]%></a></td>
+  </tr>
+  <tr>
+    <td>Режисёр</td>
+    <td><% for (j=0;j<producer.length - 1; j++){%><a href="/films/producer/<%=producer[j]%>"><%=producer[j]%></a>,  <%}%><a href="/films/producer/<%=producer[producer.length - 1]%>"><%=producer[producer.length - 1]%></a></td>
+  </tr>
+  <tr>
+    <td>Cценарий</td>
+    <td><% for (j=0;j<filmscript.length - 1; j++){%><a href="/films/filmscript/<%=filmscript[j]%>"><%=filmscript[j]%></a>,  <%}%><a href="/films/filmscript/<%=filmscript[filmscript.length - 1]%>"><%=filmscript[filmscript.length - 1]%></a></td>
+  </tr>
+  <tr>
+    <td>Оператор</td>
+    <td><% for (j=0;j<operator.length - 1; j++){%><a href="/films/operator/<%=operator[j]%>"><%=operator[j]%></a>,  <%}%><a href="/films/operator/<%=operator[operator.length - 1]%>"><%=operator[operator.length - 1]%></a></td>
+  </tr>
+  <tr>
+    <td>Композитор</td>
+    <td><% for (j=0;j<composer.length - 1; j++){%><a href="/films/composer/<%=composer[j]%>"><%=composer[j]%></a>,  <%}%><a href="/films/composer/<%=composer[composer.length - 1]%>"><%=composer[composer.length - 1]%></a></td>
+  </tr>
+  <tr>
+    <td>Художник</td>
+    <td><% for (j=0;j<painter.length - 1; j++){%><a href="/films/painter/<%=painter[j]%>"><%=painter[j]%></a>,  <%}%><a href="/films/painter/<%=painter[painter.length - 1]%>"><%=painter[painter.length - 1]%></a></td>
+  </tr>
+  <tr>
+    <td>Монтаж</td>
+    <td><% for (j=0;j<installation.length - 1; j++){%><a href="/films/installation/<%=installation[j]%>"><%=installation[j]%></a>,  <%}%><a href="/films/installation/<%=installation[installation.length - 1]%>"><%=installation[installation.length - 1]%></a></td>
+  </tr>
+  <tr>
+    <td>Жанр</td>
+    <td><% for (j=0;j<category.length - 1; j++){%><a href="/films/category/<%=category[j]%>"><%=category[j]%></a>,  <%}%><a href="/films/category/<%=category[category.length - 1]%>"><%=category[category.length - 1]%></a></td>
+  </tr>
+  <tr>
+    <td>Время</td>
+    <td><%= obj.time %> мин </td>
+  </tr>
+  <tr>
+    <td>
+
+      <form action= "/favorite/<%= obj.favorite %>/<%= obj.id %>" method="post">
+        <div class="btn-group dropup" role="group" aria-label="Button group with nested dropdown">
+          <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Смотреть трейлер
+            </button>
+            <div class="dropdown-menu">
+              <iframe width="956" height="528" src= <%= obj.url_treiler %> > </iframe>
+            </div>
+          </div>
+          <% if (obj.login != undefined) {%>
+            <% if (obj.favorite == 0) {%>
+              <button type="submit" class="btn btn-info">Добавить в любимые</button>
+            <%}%>
+            <% if (obj.favorite == 1){%>
+              <button type="submit" class="btn btn-info">Удалить из любимых</button>
+            <%}%>
+          <%}%>
+        </div>
+      </form>
+
+    </td>
+    <td>В главных ролях</td>
+    <td><% for (j=0;j<actor.length - 1; j++){%><a href="/films/actor/<%=actor[j]%>"><%=actor[j]%></a>,  <%}%><a href="/films/actor/<%=actor[actor.length - 1]%>"><%=actor[actor.length - 1]%></a></td>
+  </tr>
+  </tbody>
+</table>
+
+<div>
+  <% if (obj.reviews.length != 0) {%> <h4 class="all"> Отзывы </h4> <%}%>
+  <%for(i =0; i < obj.reviews.length; i++) { %>
+   <div class = "login"><%=obj.reviews[i].login%></div>
+   <div class="review"> <%=obj.reviews[i].review%> </div>
+  <%}%>
+
+  <% if (obj.login != undefined) {%>
+   <form action = "<%=obj.id%>/review" method = "post" class = "review">
+     <div class="form-group">
+        <label for="exampleFormControlTextarea1">Написать отзыв</label>
+        <textarea name="review" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary"> Оставить отзыв</button>
+    </form>
+  <%}%>
+</div>
+
+<div class="bottom">
+  Copyright © 2018. All rights reserved. КиноПоисковик.
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
