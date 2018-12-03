@@ -395,7 +395,6 @@ app.get('/film/:id', (req, res ) => {
                                                     client.query('select * from reviews where reviews.product_id = $1', [req.params.id], function (err, result) {
                                                         obj.reviews = result.rows.sort(compare);
                                                         done();
-                                                        console.log(obj);
                                                         res.render('film', {obj: obj});
                                                     });
                                                 });

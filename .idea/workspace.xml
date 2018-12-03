@@ -61,8 +61,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="397" column="73" selection-start-line="397" selection-start-column="73" selection-end-line="397" selection-end-column="73" />
+            <state relative-caret-position="306">
+              <caret line="396" column="63" selection-start-line="396" selection-start-column="63" selection-end-line="396" selection-end-column="63" />
               <folding>
                 <element signature="e#1633#7251#0" />
                 <element signature="e#7307#14090#0" />
@@ -72,27 +72,9 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package-lock.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="1" selection-start-column="1" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="1" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/film.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2091" />
+            <state relative-caret-position="-867" />
           </provider>
         </entry>
       </file>
@@ -222,12 +204,12 @@
       <workItem from="1543824831072" duration="1147000" />
       <workItem from="1543833828458" duration="1480000" />
       <workItem from="1543836960168" duration="8764000" />
-      <workItem from="1543854546834" duration="870000" />
+      <workItem from="1543854546834" duration="1293000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12261000" />
+    <option name="totallyTimeSpent" value="12684000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -295,13 +277,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/film.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2091" />
+        <state relative-caret-position="-867" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="397" column="73" selection-start-line="397" selection-start-column="73" selection-end-line="397" selection-end-column="73" />
+        <state relative-caret-position="306">
+          <caret line="396" column="63" selection-start-line="396" selection-start-column="63" selection-end-line="396" selection-end-column="63" />
           <folding>
             <element signature="e#1633#7251#0" />
             <element signature="e#7307#14090#0" />
