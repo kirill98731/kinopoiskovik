@@ -10,21 +10,27 @@ app.use('/films/',express.static(__dirname + '/public'));
 app.use('/films/:option/',express.static(__dirname + '/public'));
 app.use('/film/',express.static(__dirname + '/public'));
 app.use('/user/:do',express.static(__dirname + '/public'));
-app.use(cookieParser());
+app.use('/favorite_films/',express.static(__dirname + '/public'));
 
-function compare(A, B) {
-    return A.review_id - B.review_id;
-}
+app.use(cookieParser());
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+// const config = {
+//     host: "ec2-54-243-150-10.compute-1.amazonaws.com",
+//     user: 'hojubgdnbjkdzo',
+//     database: 'ddi1qu9hjo2pd4',
+//     password: '2e9c41f63ddaf814b02e9d5f5bde436f28702ea66819b56884d99f384eac198b',
+//     port: 5432
+// };
+
 const config = {
-    host: "ec2-54-243-150-10.compute-1.amazonaws.com",
-    user: 'hojubgdnbjkdzo',
-    database: 'ddi1qu9hjo2pd4',
-    password: '2e9c41f63ddaf814b02e9d5f5bde436f28702ea66819b56884d99f384eac198b',
+    user: 'postgres',
+    database: 'Kinopoiskovik',
+    password: '5380018111g',
     port: 5432
 };
+
 
 app.get('/', function (req, res) {
     var obj ={
@@ -48,7 +54,13 @@ app.get('/user/:do', function (req, res) {
         obj.text = 'Войти';
     }
     else if((obj.do == 'edit') || (obj.do == 'edit_err')){
-        obj.text = 'Сохранить изменения';
+        if (req.cookies.login != undefined) {
+            obj.text = 'Сохранить изменения';
+        }
+        else {
+            obj.do = 'login';
+            obj.text = 'Войти';
+        }
     }
     res.render('form', {obj: obj});
 });
@@ -393,7 +405,9 @@ app.get('/film/:id', (req, res ) => {
                                                         obj.favorite = 1;
                                                     }
                                                     client.query('select * from reviews where reviews.product_id = $1', [req.params.id], function (err, result) {
-                                                        obj.reviews = result.rows.sort(compare);
+                                                        obj.reviews = result.rows.sort(function (A, B) {
+                                                            return A.review_id - B.review_id;
+                                                        });
                                                         done();
                                                         res.render('film', {obj: obj});
                                                     });
@@ -412,91 +426,93 @@ app.get('/film/:id', (req, res ) => {
 });
 
 app.get('/favorite_films', function (req, res) {
-    pool.connect(function (err, client, done) {
-        if (err) {
-            console.log('Can not connect to the DB' + err);
-        }
-        client.query('select client_id from client where client.login =$1', [req.cookies.login], function (err, result) {
-            client_id = result.rows[0].client_id;
-            client.query('select product_id from favorite_product where client_id = $1' ,[client_id], function (err, result) {
-                var count = [];
-                for(iter = 0; iter < result.rows.length; iter++){
-                    count[iter] = result.rows[iter].product_id;
-                }
-                client.query('select * from product', function (err, result) {
-                    var product = result.rows;
-                    client.query('select * from producer', function (err, result) {
-                        var producer = result.rows;
-                        client.query('select * from country', function (err, result) {
-                            var country = result.rows;
-                            client.query('select * from category', function (err, result) {
-                                var category = result.rows;
-                                client.query('select * from product_producer', function (err, result) {
-                                    var product_producer = result.rows;
-                                    client.query('select * from product_country', function (err, result) {
-                                        var product_country = result.rows;
-                                        client.query('select * from product_category', function (err, result) {
-                                            var product_category = result.rows;
+    if (req.cookies.login != undefined) {
+        pool.connect(function (err, client, done) {
+            if (err) {
+                console.log('Can not connect to the DB' + err);
+            }
+            client.query('select client_id from client where client.login =$1', [req.cookies.login], function (err, result) {
+                client_id = result.rows[0].client_id;
+                client.query('select product_id from favorite_product where client_id = $1', [client_id], function (err, result) {
+                    var count = [];
+                    for (iter = 0; iter < result.rows.length; iter++) {
+                        count[iter] = result.rows[iter].product_id;
+                    }
+                    client.query('select * from product', function (err, result) {
+                        var product = result.rows;
+                        client.query('select * from producer', function (err, result) {
+                            var producer = result.rows;
+                            client.query('select * from country', function (err, result) {
+                                var country = result.rows;
+                                client.query('select * from category', function (err, result) {
+                                    var category = result.rows;
+                                    client.query('select * from product_producer', function (err, result) {
+                                        var product_producer = result.rows;
+                                        client.query('select * from product_country', function (err, result) {
+                                            var product_country = result.rows;
+                                            client.query('select * from product_category', function (err, result) {
+                                                var product_category = result.rows;
 
-                                            var films = [];
-                                            count.forEach(function (item, iter, count) {
+                                                var films = [];
+                                                count.forEach(function (item, iter, count) {
 
-                                                var obj = {
-                                                    id: iter + 1,
-                                                    product_id: count[iter],
-                                                    name: product[count[iter] - 1].name,
-                                                    year: product[count[iter] - 1].year,
-                                                    country: '',
-                                                    producer: '',
-                                                    filmscript: '',
-                                                    operator: '',
-                                                    composer: '',
-                                                    painter: '',
-                                                    installation: '',
-                                                    genre: '',
-                                                    url_poster: product[count[iter] - 1].url_poster,
-                                                    time: product[count[iter] - 1].time,
-                                                    url_treiler: product[count[iter] - 1].url_treiler,
-                                                    in_role: '',
-                                                };
+                                                    var obj = {
+                                                        id: iter + 1,
+                                                        product_id: count[iter],
+                                                        name: product[count[iter] - 1].name,
+                                                        year: product[count[iter] - 1].year,
+                                                        country: '',
+                                                        producer: '',
+                                                        filmscript: '',
+                                                        operator: '',
+                                                        composer: '',
+                                                        painter: '',
+                                                        installation: '',
+                                                        genre: '',
+                                                        url_poster: product[count[iter] - 1].url_poster,
+                                                        time: product[count[iter] - 1].time,
+                                                        url_treiler: product[count[iter] - 1].url_treiler,
+                                                        in_role: '',
+                                                    };
 
-                                                product_country.forEach(function (item, i, product_country) {
-                                                    if (product_country[i].product_id == count[iter]) {
-                                                        country.forEach(function (item, j, country) {
-                                                            if (product_country[i].country_id == country[j].country_id) {
-                                                                obj.country = obj.country + country[j].name.trim() + ', ';
-                                                            }
-                                                        });
-                                                    }
+                                                    product_country.forEach(function (item, i, product_country) {
+                                                        if (product_country[i].product_id == count[iter]) {
+                                                            country.forEach(function (item, j, country) {
+                                                                if (product_country[i].country_id == country[j].country_id) {
+                                                                    obj.country = obj.country + country[j].name.trim() + ', ';
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                    obj.country = obj.country.slice(0, -2);
+
+                                                    product_producer.forEach(function (item, i, product_producer) {
+                                                        if (product_producer[i].product_id == count[iter]) {
+                                                            producer.forEach(function (item, j, producer) {
+                                                                if (product_producer[i].producer_id == producer[j].producer_id) {
+                                                                    obj.producer = obj.producer + producer[j].name.trim() + ', ';
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                    obj.producer = obj.producer.slice(0, -2);
+
+                                                    product_category.forEach(function (item, i, product_category) {
+                                                        if (product_category[i].product_id == count[iter]) {
+                                                            category.forEach(function (item, j, category) {
+                                                                if (product_category[i].category_id == category[j].category_id) {
+                                                                    obj.genre = obj.genre + category[j].name.trim() + ', ';
+                                                                }
+                                                            });
+                                                        }
+                                                    });
+                                                    obj.genre = obj.genre.slice(0, -2);
+
+                                                    films[iter] = obj;
                                                 });
-                                                obj.country = obj.country.slice(0, -2);
-
-                                                product_producer.forEach(function (item, i, product_producer) {
-                                                    if (product_producer[i].product_id == count[iter]) {
-                                                        producer.forEach(function (item, j, producer) {
-                                                            if (product_producer[i].producer_id == producer[j].producer_id) {
-                                                                obj.producer = obj.producer + producer[j].name.trim() + ', ';
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                                obj.producer = obj.producer.slice(0, -2);
-
-                                                product_category.forEach(function (item, i, product_category) {
-                                                    if (product_category[i].product_id == count[iter]) {
-                                                        category.forEach(function (item, j, category) {
-                                                            if (product_category[i].category_id == category[j].category_id) {
-                                                                obj.genre = obj.genre + category[j].name.trim() + ', ';
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                                obj.genre = obj.genre.slice(0, -2);
-
-                                                films[iter] = obj;
+                                                done();
+                                                res.render('films', {obj: films, login: req.cookies.login});
                                             });
-                                            done();
-                                            res.render('films', {obj: films, login:req.cookies.login});
                                         });
                                     });
                                 });
@@ -506,7 +522,10 @@ app.get('/favorite_films', function (req, res) {
                 });
             });
         });
-    });
+    }
+    else {
+        res.redirect('/user/login');
+    }
 });
 
 app.post('/user/:do', urlencodedParser, function (req, res) {
@@ -521,8 +540,8 @@ app.post('/user/:do', urlencodedParser, function (req, res) {
                 client.query('select client_id from client where client.login = $1 or client.email = $2', [req.body.login,req.body.email], function (err, result) {
                     if (result.rows.length == 0) {
                         client.query('insert into client(password,email,login) values($1,$2,$3);', [req.body.password,req.body.email,req.body.login], function (err, result) {
-                            res.cookie('login', req.body.login, {expires: new Date(Date.now() + 3000000), httpOnly: true});
-                            res.cookie('email', req.body.email, {expires: new Date(Date.now() + 3000000), httpOnly: true});
+                            res.cookie('login', req.body.login, {expires: new Date(Date.now() + 600000), httpOnly: true});
+                            res.cookie('email', req.body.email, {expires: new Date(Date.now() + 600000), httpOnly: true});
                             done();
                             res.redirect('/');
                         });
@@ -543,8 +562,8 @@ app.post('/user/:do', urlencodedParser, function (req, res) {
             client.query('select * from client where client.email = $1', [req.body.email], function (err, result) {
                 if (result.rows.length != 0) {
                     if (req.body.password == result.rows[0].password) {
-                        res.cookie('login', result.rows[0].login, {expires: new Date(Date.now() + 3000000), httpOnly: true});
-                        res.cookie('email', req.body.email, {expires: new Date(Date.now() + 3000000), httpOnly: true});
+                        res.cookie('login', result.rows[0].login, {expires: new Date(Date.now() + 600000), httpOnly: true});
+                        res.cookie('email', req.body.email, {expires: new Date(Date.now() + 600000), httpOnly: true});
                         res.redirect('/');
                     }
                     else {
@@ -560,99 +579,122 @@ app.post('/user/:do', urlencodedParser, function (req, res) {
         });
     }
     else if ((req.params.do == 'edit') || (req.params.do == 'edit_err')) {
-        pool.connect(function (err, client, done) {
-            client.query('select client_id from client where client.login = $1 or client.email = $2', [req.body.login,req.body.email], function (err, result) {
-                if ((result.rows.length == 0) && (req.body.login.length < 21)) {
-                    client.query('select * from client where client.email = $1', [req.cookies.email], function (err, result) {
-                        var user_id = result.rows[0].client_id;
-                        var login, email, password;
-                        if (req.body.login != ''){
-                            login = req.body.login;
-                        }
-                        else {
-                            login = result.rows[0].login;
-                        }
+        if (req.cookies.login != undefined) {
+            pool.connect(function (err, client, done) {
+                client.query('select client_id from client where client.login = $1 or client.email = $2', [req.body.login, req.body.email], function (err, result) {
+                    if ((result.rows.length == 0) && (req.body.login.length < 21)) {
+                        client.query('select * from client where client.email = $1', [req.cookies.email], function (err, result) {
+                            var user_id = result.rows[0].client_id;
+                            var login, email, password;
+                            if (req.body.login != '') {
+                                login = req.body.login;
+                            }
+                            else {
+                                login = result.rows[0].login;
+                            }
 
-                        if (req.body.email != ''){
-                            email = req.body.email;
-                        }
-                        else {
-                            email = result.rows[0].email;
-                        }
+                            if (req.body.email != '') {
+                                email = req.body.email;
+                            }
+                            else {
+                                email = result.rows[0].email;
+                            }
 
-                        if (req.body.password != ''){
-                            password = req.body.password;
-                        }
-                        else{
-                            password = result.rows[0].password;
-                        }
-                        client.query('update reviews set login =$1 where reviews.login = $2', [login,req.cookies.login], function (err, result) {
-                            client.query('update client set login =$1 where client.client_id = $2', [login, user_id], function (err, result) {
-                                res.cookie('login', login, {expires: new Date(Date.now() + 3000000), httpOnly: true});
-                                client.query('update client set email =$1 where client.client_id = $2', [email, user_id], function (err, result) {
-                                    res.cookie('email', email, {expires: new Date(Date.now() + 3000000), httpOnly: true});
-                                    client.query('update client set password =$1 where client.client_id = $2', [password, user_id], function (err, result) {
-                                        done();
-                                        res.redirect('/');
+                            if (req.body.password != '') {
+                                password = req.body.password;
+                            }
+                            else {
+                                password = result.rows[0].password;
+                            }
+                            client.query('update reviews set login =$1 where reviews.login = $2', [login, req.cookies.login], function (err, result) {
+                                client.query('update client set login =$1 where client.client_id = $2', [login, user_id], function (err, result) {
+                                    res.cookie('login', login, {expires: new Date(Date.now() + 600000), httpOnly: true});
+                                    client.query('update client set email =$1 where client.client_id = $2', [email, user_id], function (err, result) {
+                                        res.cookie('email', email, {
+                                            expires: new Date(Date.now() + 600000),
+                                            httpOnly: true
+                                        });
+                                        client.query('update client set password =$1 where client.client_id = $2', [password, user_id], function (err, result) {
+                                            done();
+                                            res.redirect('/');
+                                        });
                                     });
                                 });
                             });
                         });
-                    });
-                }
-                else{
-                    done();
-                    res.redirect('/user/edit_err');
-                }
+                    }
+                    else {
+                        done();
+                        res.redirect('/user/edit_err');
+                    }
+                });
             });
-        });
+        }
+        else {
+            res.redirect('/user/login');
+        }
     }
     if (req.params.do == 'delete'){
-        pool.connect(function (err, client, done) {
-            client.query('delete from client * where client.login = $1;', [req.cookies.login], function (err, result) {
-                res.clearCookie('login');
-                res.clearCookie('email');
-                done();
-                res.redirect('/');
+        if (req.cookies.login != undefined) {
+            pool.connect(function (err, client, done) {
+                client.query('delete from client * where client.login = $1;', [req.cookies.login], function (err, result) {
+                    res.clearCookie('login');
+                    res.clearCookie('email');
+                    done();
+                    res.redirect('/');
+                });
             });
-        });
+        }
+        else {
+            res.redirect('/user/login');
+        }
     }
 });
 
 app.post('/favorite/:favorite/:id', urlencodedParser, function (req, res) {
-    pool.connect(function (err, client, done) {
-        client.query('select client_id from client where client.login = $1;', [req.cookies.login], function (err, result) {
-            var client_id = result.rows[0].client_id;
-            if (req.params.favorite == 0) {
-                client.query('insert into favorite_product(client_id,product_id) values($1,$2);', [client_id, req.params.id], function (err, result) {
-                    done();
-                    res.redirect('/film/' + req.params.id);
-                });
-            }
-            else if (req.params.favorite == 1) {
-                client.query('delete from favorite_product where client_id = $1 and product_id = $2;', [client_id,req.params.id], function (err, result) {
-                    done();
-                    res.redirect('/film/' + req.params.id);
-                });
-            }
+    if (req.cookies.login != undefined) {
+        pool.connect(function (err, client, done) {
+            client.query('select client_id from client where client.login = $1;', [req.cookies.login], function (err, result) {
+                var client_id = result.rows[0].client_id;
+                if (req.params.favorite == 0) {
+                    client.query('insert into favorite_product(client_id,product_id) values($1,$2);', [client_id, req.params.id], function (err, result) {
+                        done();
+                        res.redirect('/film/' + req.params.id);
+                    });
+                }
+                else if (req.params.favorite == 1) {
+                    client.query('delete from favorite_product where client_id = $1 and product_id = $2;', [client_id, req.params.id], function (err, result) {
+                        done();
+                        res.redirect('/film/' + req.params.id);
+                    });
+                }
+            });
         });
-    });
+    }
+    else{
+        res.redirect('/user/login');
+    }
 });
 
 app.post('/film/:id/review', urlencodedParser, function (req, res) {
-    pool.connect(function (err, client, done) {
-        client.query('insert into reviews(product_id,login,review) values($1,$2,$3);', [req.params.id,req.cookies.login,req.body.review], function (err, result) {
-            done();
-            res.redirect('/film/' + req.params.id);
+    if (req.cookies.login != undefined) {
+        pool.connect(function (err, client, done) {
+            client.query('insert into reviews(product_id,login,review) values($1,$2,$3);', [req.params.id, req.cookies.login, req.body.review], function (err, result) {
+                done();
+                res.redirect('/film/' + req.params.id);
+            });
         });
-    });
+    }
+    else {
+        res.redirect('/user/login');
+    }
 });
 
-// app.listen(3000, function () {
-//      console.log('Server is running.. on Port 3000');
-// });
-let port = process.env.PORT;
-if (port == null || port == "") {
-    port = 3000;
-}
-app.listen(port);
+app.listen(3000, function () {
+     console.log('Server is running.. on Port 3000');
+});
+// let port = process.env.PORT;
+// if (port == null || port == "") {
+//     port = 3000;
+// }
+// app.listen(port);
