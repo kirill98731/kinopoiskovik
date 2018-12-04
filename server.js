@@ -16,20 +16,20 @@ app.use(cookieParser());
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-// const config = {
-//     host: "ec2-54-243-150-10.compute-1.amazonaws.com",
-//     user: 'hojubgdnbjkdzo',
-//     database: 'ddi1qu9hjo2pd4',
-//     password: '2e9c41f63ddaf814b02e9d5f5bde436f28702ea66819b56884d99f384eac198b',
-//     port: 5432
-// };
-
 const config = {
-    user: 'postgres',
-    database: 'Kinopoiskovik',
-    password: '5380018111g',
+    host: "ec2-54-243-150-10.compute-1.amazonaws.com",
+    user: 'hojubgdnbjkdzo',
+    database: 'ddi1qu9hjo2pd4',
+    password: '2e9c41f63ddaf814b02e9d5f5bde436f28702ea66819b56884d99f384eac198b',
     port: 5432
 };
+
+// const config = {
+//     user: 'postgres',
+//     database: 'Kinopoiskovik',
+//     password: '5380018111g',
+//     port: 5432
+// };
 
 
 app.get('/', function (req, res) {
@@ -690,11 +690,11 @@ app.post('/film/:id/review', urlencodedParser, function (req, res) {
     }
 });
 
-app.listen(3000, function () {
-     console.log('Server is running.. on Port 3000');
-});
-// let port = process.env.PORT;
-// if (port == null || port == "") {
-//     port = 3000;
-// }
-// app.listen(port);
+// app.listen(3000, function () {
+//      console.log('Server is running.. on Port 3000');
+// });
+let port = process.env.PORT;
+if (port == null || port == "") {
+    port = 3000;
+}
+app.listen(port);
