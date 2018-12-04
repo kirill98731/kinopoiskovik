@@ -17,10 +17,10 @@ app.use(cookieParser());
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 const config = {
-    host: "ec2-54-75-231-156.eu-west-1.compute.amazonaws.com",
-    user: 'trquhsjtzaregx',
-    database: 'd982lechspom7k',
-    password: '2ede23e37c77eb099231b817d61a0a5675f97286a4a3e78c8e190770cb52b3fe',
+    host: "ec2-54-247-119-167.eu-west-1.compute.amazonaws.com",
+    user: 'zdtfqqgrngfjeu',
+    database: 'd45f90tja8uc1f',
+    password: '6ea485edd12ca7b60fb3b07450f9adbf004468763d787c221870282078091ff1',
     port: 5432
 };
 
