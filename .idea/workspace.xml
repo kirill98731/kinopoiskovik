@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8357dbb2-b2a2-4d9a-949b-3977eda139f6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-    </list>
+    <list default="true" id="8357dbb2-b2a2-4d9a-949b-3977eda139f6" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -62,7 +60,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
+            <state relative-caret-position="255">
               <caret line="695" selection-start-line="695" selection-end-line="699" selection-end-column="17" />
               <folding>
                 <element signature="e#916#1010#0" />
@@ -216,12 +214,12 @@
       <workItem from="1543836960168" duration="8764000" />
       <workItem from="1543854546834" duration="2493000" />
       <workItem from="1543858940760" duration="880000" />
-      <workItem from="1543911511061" duration="4245000" />
+      <workItem from="1543911511061" duration="4497000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19009000" />
+    <option name="totallyTimeSpent" value="19261000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -295,7 +293,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
+        <state relative-caret-position="255">
           <caret line="695" selection-start-line="695" selection-end-line="699" selection-end-column="17" />
           <folding>
             <element signature="e#916#1010#0" />
