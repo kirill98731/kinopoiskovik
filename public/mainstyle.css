@@ -61,7 +61,7 @@ h2{
 
 .review{
   border-radius: 5px;
-  width: 40%;
+  width: 50%;
   margin-left: 25%;
   margin-top: 10px;
   padding: 10px;
@@ -80,7 +80,14 @@ h2{
   background: antiquewhite;
 }
 
-.all{
-  margin-left: 25%;
+.wow{
+  background: lightgrey;
 }
+
+.wew{
+  width: 50%;
+  margin-left: 25%;
+  background: #E7ECEF;
+}
+
 

@@ -138,10 +138,12 @@
   </tbody>
 </table>
 
-<div>
-  <% if (obj.reviews.length != 0) {%> <h4 class="all"> Отзывы </h4> <%}%>
+<% if (obj.reviews.length != 0) {%>
+<div class="wow">
+  <div class="wew">
+  <% if (obj.reviews.length != 0) {%> <h4 class="wew"> Отзывы </h4> <%}%>
   <%for(i =0; i < obj.reviews.length; i++) { %>
-   <div class = "login"><%=obj.reviews[i].login%></div>
+   <div class = "login"> <%=obj.reviews[i].login%></div>
    <div class="review"> <%=obj.reviews[i].review%> </div>
   <%}%>
 
@@ -154,7 +156,9 @@
       <button type="submit" class="btn btn-primary"> Оставить отзыв</button>
     </form>
   <%}%>
+  </div>
 </div>
+<%}%>
 
 <div class="bottom">
   Copyright © 2018. All rights reserved. КиноПоисковик.
