@@ -146,16 +146,16 @@
       <div class = "login"> <%=obj.reviews[i].login%></div>
       <div class="review"> <%=obj.reviews[i].review%> </div>
     <%}%>
+    <% if (obj.login != undefined) {%>
+    <form action = "<%=obj.id%>/review" method = "post" class = "review">
+     <div class="form-group">
+      <label for="exampleFormControlTextarea1">Написать отзыв</label>
+      <textarea name="review" class="form-control" id="validationServer01" rows="3" required></textarea>
+     </div>
+     <button type="submit" class="btn btn-primary"> Оставить отзыв</button>
+    </form>
+    <%}%>
   </div>
-  <% if (obj.login != undefined) {%>
-  <form action = "<%=obj.id%>/review" method = "post" class = "review">
-    <div class="form-group">
-     <label for="exampleFormControlTextarea1">Написать отзыв</label>
-     <textarea name="review" class="form-control" id="validationServer01" rows="3" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary"> Оставить отзыв</button>
-  </form>
-  <%}%>
 </div>
 
 <div class="bottom">
