@@ -57,7 +57,7 @@
     <%if ((obj.do == "edit") || (obj.do == "edit_err")) {%>
       <input name = "email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "<%= obj.email%>">
     <%} else {%>
-      <input name = "email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <input name = "email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
     <%}%>
   </div>
   <div class="form-group">
@@ -65,7 +65,7 @@
     <%if ((obj.do == "edit") || (obj.do == "edit_err")) {%>
       <input name = "password" type="password" class="form-control" id="exampleInputPassword1" placeholder="********">
     <%} else {%>
-      <input name = "password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <input name = "password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
     <%}%>
   </div>
   <% if ((obj.do != "login") && (obj.do != "login_err")) {%>
@@ -75,7 +75,7 @@
         <input name = "login" type="login" class="form-control" id="exampleInputLogin" placeholder="<%=obj.login %>">
         <small id="emailHelp" class="form-text text-muted">Логин не должен превышать 20 символов</small>
       <%} else {%>
-        <input name = "login" type="login" class="form-control" id="exampleInputLogin" placeholder="Login">
+        <input name = "login" type="login" class="form-control" id="exampleInputLogin" placeholder="Login" required>
         <small id="emailHelp" class="form-text text-muted">Логин не должен превышать 20 символов</small>
       <%}%>
     </div>
