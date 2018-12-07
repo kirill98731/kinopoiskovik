@@ -11,13 +11,15 @@
       position: fixed; /* Фиксированное положение */
       bottom: 0; /* Левый нижний угол */
     }
-    form {
+    .qwerty{
+      width: 20%;
+      margin-left: 40%;
+      margin-top: 100px;
+    }
+    .qwerty1{
       width: 20%;
       margin-left: 40%;
       margin-top: 10px;
-    }
-    .qwerty{
-      margin-top: 100px;
     }
     button{
       width: 60%;
@@ -40,6 +42,20 @@
         <a class="nav-item nav-link" href="/favorite_films">Любимые</a>
       <%}%>
     </div>
+    <% if (obj.login == undefined) {%>
+      <div class="btn-group" role="group" aria-label="Basic example" id = "register">
+        <a class="btn btn-secondary" href="/user/sign" role="button">Регистрация</a>
+        <a class="btn btn-secondary" href="/user/login" role="button">Войти</a>
+      </div>
+    <%}%>
+    <% if (obj.login != undefined) {%>
+      <form action= "/user/logout" method="post" id = "register">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <a class="btn btn-secondary" href="/user/edit" role="button" id = "out"><%= obj.login %></a>
+          <button type="submit" class="btn btn-secondary"> Выйти </button>
+        </div>
+      </form>
+    <%}%>
   </div>
 </nav>
 
@@ -83,7 +99,7 @@
   <button type="submit" class="btn btn-primary"><%= obj.text %></button>
 </form>
 <%if ((obj.do == "edit") || (obj.do == "edit_err")) {%>
-  <form action= "/user/delete" method="post">
+  <form action= "/user/delete" method="post" class="qwerty1">
     <button type="submit" class="btn btn-danger">Удалить профиль</button>
   </form>
 <%}%>
