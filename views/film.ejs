@@ -138,7 +138,7 @@
   </tbody>
 </table>
 
-<% if (obj.reviews.length != 0) {%>
+
 <div class="wow">
   <div class="wew">
     <% if (obj.reviews.length != 0) {%> <h4 class="wew"> Отзывы </h4> <%}%>
@@ -147,18 +147,15 @@
       <div class="review"> <%=obj.reviews[i].review%> </div>
     <%}%>
   </div>
+  <% if (obj.login != undefined) {%>
+  <form action = "<%=obj.id%>/review" method = "post" class = "review">
+    <div class="form-group">
+     <label for="exampleFormControlTextarea1">Написать отзыв</label>
+     <textarea name="review" class="form-control" id="validationServer01" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary"> Оставить отзыв</button>
+  </form>
 </div>
-<%}%>
-<% if (obj.login != undefined) {%>
-<form action = "<%=obj.id%>/review" method = "post" class = "review">
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Написать отзыв</label>
-    <textarea name="review" class="form-control" id="validationServer01" rows="3" required></textarea>
-  </div>
-  <button type="submit" class="btn btn-primary"> Оставить отзыв</button>
-</form>
-<%}%>
-
 
 <div class="bottom">
   Copyright © 2018. All rights reserved. КиноПоисковик.
