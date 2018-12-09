@@ -24,7 +24,7 @@ const config = {
     database: 'd45f90tja8uc1f',
     password: '6ea485edd12ca7b60fb3b07450f9adbf004468763d787c221870282078091ff1',
     port: 5432,
-    //ssl: true
+    ssl: true
 };
 
 app.get('/', function (req, res) {
