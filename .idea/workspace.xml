@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8357dbb2-b2a2-4d9a-949b-3977eda139f6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -17,30 +19,30 @@
     <session id="1359993783">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
-          <entry key="project.open.time.0" value="1" />
+          <entry key="project.closed" value="10" />
+          <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.6" value="3" />
           <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="10" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="1" />
           <entry key="ejs" value="4" />
-          <entry key="js" value="1" />
-          <entry key="json" value="8" />
+          <entry key="js" value="2" />
+          <entry key="json" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="1" />
           <entry key="EJS" value="4" />
-          <entry key="JSON" value="8" />
-          <entry key="JavaScript" value="1" />
+          <entry key="JSON" value="12" />
+          <entry key="JavaScript" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -63,67 +65,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1801">
-              <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+            <state relative-caret-position="11628">
+              <caret line="684" column="1" selection-start-line="684" selection-start-column="1" selection-end-line="684" selection-end-column="1" />
               <folding>
-                <element signature="e#1110#1204#0" />
-                <element signature="e#1249#1898#0" />
-                <element signature="e#1974#7592#0" />
-                <element signature="e#7648#14242#0" />
-                <element signature="e#14282#24955#0" />
-                <element signature="e#25006#31844#0" />
-                <element signature="e#37998#39060#0" />
-                <element signature="e#39131#39565#0" />
                 <marker date="1544350925164" expanded="true" signature="685:940" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/film.ejs">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/films.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="918">
-              <caret line="54" column="9" selection-start-line="47" selection-start-column="4" selection-end-line="54" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/form.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
-              <caret line="64" column="6" selection-start-line="64" selection-start-column="6" selection-end-line="64" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/main.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="39" column="10" selection-start-line="35" selection-start-column="4" selection-end-line="39" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/mainstyle.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="78" column="15" lean-forward="true" selection-start-line="78" selection-start-column="15" selection-end-line="78" selection-end-column="15" />
+            <state relative-caret-position="159">
+              <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -160,20 +118,16 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/fast-savannah-67480/node_modules" />
-    <handled-path value="$PROJECT_DIR$/kinopoiskovik/node_modules" />
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths>
-      <path value="$PROJECT_DIR$/fast-savannah-67480/package.json" />
-      <path value="$PROJECT_DIR$/kinopoiskovik/package.json" />
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="735" />
-    <option name="y" value="15" />
+    <option name="x" value="527" />
+    <option name="y" value="50" />
     <option name="width" value="1035" />
     <option name="height" value="945" />
   </component>
@@ -191,6 +145,16 @@
               <item name="Kinopoiskovik" type="b2602c69:ProjectViewProjectNode" />
               <item name="Kinopoiskovik" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Kinopoiskovik" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Kinopoiskovik" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Kinopoiskovik" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Kinopoiskovik" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -202,6 +166,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -240,12 +205,13 @@
       <workItem from="1544179516212" duration="4628000" />
       <workItem from="1544298275230" duration="4610000" />
       <workItem from="1544347287843" duration="1175000" />
-      <workItem from="1544348577183" duration="2970000" />
+      <workItem from="1544348577183" duration="4456000" />
+      <workItem from="1544354906678" duration="137000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37875000" />
+    <option name="totallyTimeSpent" value="39498000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -262,8 +228,8 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32907802" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4990086" visible="true" weight="0.32907802" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="10" sideWeight="0.5009914" side_tool="true" visible="true" weight="0.32907802" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -274,6 +240,12 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/fast-savannah-67480" />
+      <path value="$PROJECT_DIR$/kinopoiskovik" />
+    </ignored-roots>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/views/films.ejs">
@@ -307,39 +279,34 @@
     <entry file="file://$PROJECT_DIR$/views/film.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
+          <caret line="139" selection-start-line="139" selection-end-line="139" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/mainstyle.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
-          <caret line="78" column="15" lean-forward="true" selection-start-line="78" selection-start-column="15" selection-end-line="78" selection-end-column="15" />
+          <caret line="78" column="15" selection-start-line="78" selection-start-column="15" selection-end-line="78" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fast-savannah-67480/package.json" />
+    <entry file="file://$PROJECT_DIR$/kinopoiskovik/package.json" />
+    <entry file="file://$PROJECT_DIR$/kinopoiskovik/server.js" />
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11628">
+          <caret line="684" column="1" selection-start-line="684" selection-start-column="1" selection-end-line="684" selection-end-column="1" />
+          <folding>
+            <marker date="1544350925164" expanded="true" signature="685:940" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1801">
-          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
-          <folding>
-            <element signature="e#1110#1204#0" />
-            <element signature="e#1249#1898#0" />
-            <element signature="e#1974#7592#0" />
-            <element signature="e#7648#14242#0" />
-            <element signature="e#14282#24955#0" />
-            <element signature="e#25006#31844#0" />
-            <element signature="e#37998#39060#0" />
-            <element signature="e#39131#39565#0" />
-            <marker date="1544350925164" expanded="true" signature="685:940" ph="..." />
-          </folding>
+        <state relative-caret-position="159">
+          <caret line="21" column="4" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
         </state>
       </provider>
     </entry>

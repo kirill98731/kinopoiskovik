@@ -27,6 +27,6 @@
   },
   "homepage": "https://github.com/kirill98731/kinopoiskovik#readme",
   "engines": {
-    "node": "v10.14.1"
+    "node": "10.x"
   }
 }
