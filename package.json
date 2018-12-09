@@ -4,10 +4,11 @@
   "description": "heroku app",
   "main": "server.js",
   "dependencies": {
+    "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
-    "express": "^4.16.4",
     "ejs": "^2.6.1",
+    "express": "^4.16.4",
     "pg": "^7.7.1"
   },
   "devDependencies": {},
@@ -24,8 +25,5 @@
   "bugs": {
     "url": "https://github.com/kirill98731/kinopoiskovik/issues"
   },
-  "homepage": "https://github.com/kirill98731/kinopoiskovik#readme",
-  "engines": {
-    "node": "v8.12.0"
-  }
+  "homepage": "https://github.com/kirill98731/kinopoiskovik#readme"
 }

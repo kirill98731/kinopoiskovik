@@ -71,7 +71,7 @@
   <div class="form-group">
     <label for="exampleInputEmail1">Почтовый адрес</label>
     <%if ((obj.do == "edit") || (obj.do == "edit_err")) {%>
-      <input name = "email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "<%= obj.email%>">
+      <input name = "email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "<%= obj.email%>" >
     <%} else {%>
       <input name = "email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
     <%}%>
@@ -79,20 +79,23 @@
   <div class="form-group">
     <label for="exampleInputPassword1">Пароль</label>
     <%if ((obj.do == "edit") || (obj.do == "edit_err")) {%>
-      <input name = "password" type="password" class="form-control" id="exampleInputPassword1" placeholder="********">
+      <input name = "password" type="password" class="form-control" id="exampleInputPassword1" placeholder="********" pattern="(?=^.{8,20}$)(?=.*\d)(?![.\n])(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$">
+      <small id="emailHelp" class="form-text text-muted">Пароль(верхний регистр, нижний регистр, цифра/спец знак, 8-20 символов)</small>
     <%} else {%>
-      <input name = "password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+      <input name = "password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" pattern="(?=^.{8,20}$)(?=.*\d)(?![.\n])(?=.*[A-Z])(?=.*[a-z])(?!.*\s).*$" required>
+      <small id="emailHelp" class="form-text text-muted">Пароль(верхний регистр, нижний регистр, цифра/спец знак, 8-20 символов)</small>
     <%}%>
+
   </div>
   <% if ((obj.do != "login") && (obj.do != "login_err")) {%>
     <div class="form-group">
       <label for="exampleInputPassword1">Логин</label>
       <%if ((obj.do == "edit") || (obj.do == "edit_err")) {%>
-        <input name = "login" type="login" class="form-control" id="exampleInputLogin" placeholder="<%=obj.login %>">
-        <small id="emailHelp" class="form-text text-muted">Логин не должен превышать 20 символов</small>
+        <input name = "login" type="login" class="form-control" id="exampleInputLogin" placeholder="<%=obj.login %>" pattern= "(?=^.{8,20}$)(?!.*[^0-9A-Za-zА])(?![.\n])(?!.*\s).*$">
+        <small id="emailHelp" class="form-text text-muted">Логин должен состоять из букв или цифр от 8 до 20 символов(english)</small>
       <%} else {%>
-        <input name = "login" type="login" class="form-control" id="exampleInputLogin" placeholder="Login" required>
-        <small id="emailHelp" class="form-text text-muted">Логин не должен превышать 20 символов</small>
+        <input name = "login" type="login" class="form-control" id="exampleInputLogin" placeholder="Login" required pattern= "(?=^.{8,20}$)(?!.*[^0-9A-Za-zА])(?![.\n])(?!.*\s).*$">
+        <small id="emailHelp" class="form-text text-muted">Логин должен состоять из букв или цифр от 8 до 20 символов(english)</small>
       <%}%>
     </div>
   <%}%>

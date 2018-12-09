@@ -3,6 +3,8 @@ const express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var app = express();
+var bcrypt = require('bcrypt');
+
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
@@ -21,16 +23,9 @@ const config = {
     user: 'zdtfqqgrngfjeu',
     database: 'd45f90tja8uc1f',
     password: '6ea485edd12ca7b60fb3b07450f9adbf004468763d787c221870282078091ff1',
-    port: 5432
+    port: 5432,
+    ssl: true
 };
-
-// const config = {
-//     user: 'postgres',
-//     database: 'Kinopoiskovik',
-//     password: '5380018111g',
-//     port: 5432
-// };
-
 
 app.get('/', function (req, res) {
     var obj ={
@@ -46,7 +41,6 @@ app.get('/user/:do', function (req, res) {
         email: req.cookies.email,
         login: req.cookies.login
     };
-    // console.log(obj);
     if ((obj.do == 'sign') || (obj.do == 'sign_err')){
         obj.text = 'Зарегистрироваться';
     }
@@ -168,10 +162,6 @@ app.get('/films/:option/:name', function (req, res) {
         var sql = 'select '+ req.params.option + '_id from ' + req.params.option +' where ' + req.params.option + '.name = $1';
         client.query(sql, [req.params.name], function (err, result) {
             sql = req.params.option + '_id';
-            // console.log(req.params.option);
-            // console.log(req.params.name.trim());
-            // console.log(result.rows);
-            // console.log(result.rows[0][sql]);
             var category_id = result.rows[0][sql];
             sql = 'select product_id from product_' + req.params.option +' where product_' + req.params.option + '.' + req.params.option + '_id = $1';
             client.query(sql,[category_id], function (err, result) {
@@ -539,7 +529,9 @@ app.post('/user/:do', urlencodedParser, function (req, res) {
             pool.connect(function (err, client, done) {
                 client.query('select client_id from client where client.login = $1 or client.email = $2', [req.body.login,req.body.email], function (err, result) {
                     if (result.rows.length == 0) {
-                        client.query('insert into client(password,email,login) values($1,$2,$3);', [req.body.password,req.body.email,req.body.login], function (err, result) {
+                        var salt = bcrypt.genSaltSync(10);
+                        var passwordToSave = bcrypt.hashSync(req.body.password, salt);
+                        client.query('insert into client(password,email,login,salt) values($1,$2,$3,$4);', [passwordToSave,req.body.email,req.body.login,salt], function (err, result) {
                             res.cookie('login', req.body.login, {expires: new Date(Date.now() + 600000), httpOnly: true});
                             res.cookie('email', req.body.email, {expires: new Date(Date.now() + 600000), httpOnly: true});
                             done();
@@ -561,7 +553,7 @@ app.post('/user/:do', urlencodedParser, function (req, res) {
         pool.connect(function (err, client, done) {
             client.query('select * from client where client.email = $1', [req.body.email], function (err, result) {
                 if (result.rows.length != 0) {
-                    if (req.body.password == result.rows[0].password) {
+                    if (bcrypt.hashSync(req.body.password, result.rows[0].salt) == result.rows[0].password) {
                         res.cookie('login', result.rows[0].login, {expires: new Date(Date.now() + 600000), httpOnly: true});
                         res.cookie('email', req.body.email, {expires: new Date(Date.now() + 600000), httpOnly: true});
                         res.redirect('/');
@@ -601,24 +593,20 @@ app.post('/user/:do', urlencodedParser, function (req, res) {
                             }
 
                             if (req.body.password != '') {
-                                password = req.body.password;
+                                var salt = bcrypt.genSaltSync(10);
+                                var passwordToSave = bcrypt.hashSync(req.body.password, salt);
+                                password = passwordToSave ;
                             }
                             else {
                                 password = result.rows[0].password;
+                                var salt = result.rows[0].salt;
                             }
                             client.query('update reviews set login =$1 where reviews.login = $2', [login, req.cookies.login], function (err, result) {
-                                client.query('update client set login =$1 where client.client_id = $2', [login, user_id], function (err, result) {
+                                client.query('update client set (password,email,login,salt) = ($1,$2,$3,$4) where client.client_id = $5;', [password, email, login, salt, user_id], function (err, result) {
                                     res.cookie('login', login, {expires: new Date(Date.now() + 600000), httpOnly: true});
-                                    client.query('update client set email =$1 where client.client_id = $2', [email, user_id], function (err, result) {
-                                        res.cookie('email', email, {
-                                            expires: new Date(Date.now() + 600000),
-                                            httpOnly: true
-                                        });
-                                        client.query('update client set password =$1 where client.client_id = $2', [password, user_id], function (err, result) {
-                                            done();
-                                            res.redirect('/');
-                                        });
-                                    });
+                                    res.cookie('email', email, {expires: new Date(Date.now() + 600000), httpOnly: true});
+                                    done();
+                                    res.redirect('/');
                                 });
                             });
                         });
@@ -695,6 +683,7 @@ let port = process.env.PORT;
 if (port == null || port == "") {
     port = 3000;
 }
+
 app.listen(port, function () {
     console.log('Server is running.. on Port ' + port);
 });
